@@ -46,6 +46,12 @@ attrib "C:\PerfLogs" +h 1>NUL 2>NUL
 :: Set Hibernation type to Reduced
 powercfg /h /type reduced 1>NUL 2>NUL
 
+::Set the 'Power Management' to High Performance
+powercfg -SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+::Disable Advanced Indexing 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventUsingAdvancedIndexingOptions" /t REG_DWORD /d "1" /f 1>NUL 2>NUL
+
 :: Delete "Microsoft Edge" shortcut from Desktop
 del /f /q "C:\Users\%USERNAME%\Desktop\Microsoft Edge.lnk" 1>NUL 2>NUL
 
