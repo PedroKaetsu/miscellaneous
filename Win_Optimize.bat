@@ -518,6 +518,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
 
+:: Delete Temp Files on Boot
+echo del /s /f /q %USERPROFILE%\appdata\local\temp\*.* > %appdata%\microsoft\windows\start menu\programs\startup\cleantemp.bat
+
 :: Countdown
 cls
 for %%r in (5 4 3 2 1) do (
