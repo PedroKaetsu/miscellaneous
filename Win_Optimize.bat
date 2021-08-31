@@ -1,12 +1,12 @@
 @echo off
 :: BatchGotAdmin
 ::-------------------------------------
-REM  --> Checando permissões
+REM  --> Checando permissoes
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
-REM --> Se há flag de erro, não temos admin
+REM --> Se ha flag de erro, nao temos admin
 if '%errorlevel%' NEQ '0' (
-    echo Solicitando privilégios administrativos...
+    echo Solicitando privilegios administrativos...
     goto UACPrompt
 ) else ( goto gotAdmin )
 
@@ -25,7 +25,7 @@ if '%errorlevel%' NEQ '0' (
 ::--------------------------------------
 
 title Optimization
-echo Fazendo a mágica acontecer...
+echo Fazendo a magica acontecer...
 echo Por favor aguarde...
 
 :: Kill Foreground
