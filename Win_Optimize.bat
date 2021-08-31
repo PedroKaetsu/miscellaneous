@@ -1,10 +1,10 @@
 @echo off
 :: BatchGotAdmin
 ::-------------------------------------
-REM  --> Check for permissions
+REM  --> Checando permissões
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
-REM --> If error flag set, we do not have admin.
+REM --> Se há flag de erro, não temos admin
 if '%errorlevel%' NEQ '0' (
     echo Solicitando privilégios administrativos...
     goto UACPrompt
