@@ -24,7 +24,7 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 ::--------------------------------------
 
-title Optimization
+title Otimizando esse dispositivo
 echo Fazendo a magica acontecer...
 echo Por favor aguarde...
 
