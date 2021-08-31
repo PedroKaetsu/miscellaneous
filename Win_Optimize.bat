@@ -524,7 +524,7 @@ echo del /s /f /q %USERPROFILE%\appdata\local\temp\*.* > "%appdata%\microsoft\wi
 :: Countdown
 cls
 for %%r in (5 4 3 2 1) do (
-echo Restarting in %%r...
+echo Reiniciando em %%r...
 timeout 1 1>NUL 2>NUL
 cls
 )
