@@ -43,11 +43,15 @@ setx ProgramData "C:\ProgramData" /m 1>NUL 2>NUL
 :: Hide PerfLogs folder
 attrib "C:\PerfLogs" +h 1>NUL 2>NUL
 
+echo Modificando opcoes de Energia...
+
 :: Set Hibernation type to Reduced
 powercfg /h /type reduced 1>NUL 2>NUL
 
 ::Set the 'Power Management' to High Performance
 powercfg -SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+echo Desativando Indexacao...
 
 ::Disable Advanced Indexing 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventUsingAdvancedIndexingOptions" /t REG_DWORD /d "1" /f 1>NUL 2>NUL
@@ -74,6 +78,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 
 :: Disable first login animation
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFirstLogonAnimation" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
+
+echo Adicionando Registros...
 
 :: Disable all Content Delivery Manager features
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
@@ -158,6 +164,8 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d
 
 :: Disable Network Location Wizard prompts
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff" /f 1>NUL 2>NUL
+
+echo Modificando opcoes de aparencia para melhor performance...
 
 :: Change Performance Options to Adjust for best performance
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "2" /f 1>NUL 2>NUL
@@ -301,6 +309,9 @@ reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\TabPreloader" /v "AllowT
 
 :: Remove acrylic blur on sign-in screen
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "DisableAcrylicBackgroundOnLogon" /t REG_DWORD /d "1" /f 1>NUL 2>NUL
+
+echo Registros adicionados...
+echo Removendo potenciais apps que causam lentidao...
 
 :: Remove potential bloat
 powershell.exe "Get-AppxPackage *Microsoft.3DBuilder* | Remove-AppxPackage"
@@ -509,6 +520,9 @@ powershell.exe "Get-AppxProvisionedPackage -Online | where Displayname -EQ *Micr
 powershell.exe "Get-AppxProvisionedPackage -Online | where Displayname -EQ *Microsoft.WebMediaExtensions* | Remove-AppxProvisionedPackage -Online"
 powershell.exe "Get-AppxProvisionedPackage -Online | where Displayname -EQ *Microsoft.MixedReality.Portal* | Remove-AppxProvisionedPackage -Online"
 
+echo Apps removidos...
+echo Desativando Telemetria...
+
 :: Disable telemetry
 reg add "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /v "Start" /t REG_DWORD /d "4" /f 1>NUL 2>NUL
 reg add "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f 1>NUL 2>NUL
@@ -517,6 +531,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelem
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f 1>NUL 2>NUL
+
+echo Criando script de limpeza na inicializacao...
 
 :: Delete Temp Files on Boot
 echo del /s /f /q %USERPROFILE%\appdata\local\temp\*.* > "%appdata%\microsoft\windows\start menu\programs\startup\cleantemp.bat"
